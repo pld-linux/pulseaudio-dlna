@@ -2,6 +2,8 @@
 # Conditional build:
 %bcond_without	tests	# do not perform "make test"
 
+%define		module		pulseaudio_dlna
+%define		egg_name	pulseaudio_dlna
 Summary:	A small DLNA server which brings DLNA / UPNP supportto PulseAudio and Linux
 Name:		pulseaudio-dlna
 Version:	0.5.2
@@ -11,22 +13,19 @@ Group:		Applications/Sound
 Source0:	https://github.com/masmu/pulseaudio-dlna/archive/%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	3773d0333b9fc722878462e550a06a24
 URL:		https://github.com/masmu/pulseaudio-dlna
-BuildRequires:	python-dbus
-BuildRequires:	python-docopt
-BuildRequires:	python-enum34
-BuildRequires:	python-futures
-BuildRequires:	python-lxml
+BuildRequires:	python-chardet >= 2.0.1
+BuildRequires:	python-docopt >= 0.6.1
+BuildRequires:	python-futures >= 2.1.6
+BuildRequires:	python-lxml >= 3
 BuildRequires:	python-modules
-BuildRequires:	python-netifaces
-BuildRequires:	python-pip
-BuildRequires:	python-zeroconf >= 0.17
+BuildRequires:	python-netifaces >= 0.8
+BuildRequires:	python-notify2 >= 0.3
 BuildRequires:	python-protobuf >= 2.5.0
-BuildRequires:	python-proctitle
-BuildRequires:	python-psutil
-BuildRequires:	python-pygobject
-BuildRequires:	python-requests
-BuildRequires:	python-setproctitle
+BuildRequires:	python-psutil >= 1.2.1
+BuildRequires:	python-requests >= 2.2.1
+BuildRequires:	python-setproctitle >= 1.0.1
 BuildRequires:	python-setuptools
+BuildRequires:	python-zeroconf >= 0.17
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 Requires:	sox
@@ -63,3 +62,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.md
+%attr(755,root,root) %{_bindir}/pulseaudio-dlna
+%{_mandir}/man1/pulseaudio-dlna.1*
+%{py_sitescriptdir}/%{module}
+%{py_sitescriptdir}/%{egg_name}-%{version}-py*.egg-info
